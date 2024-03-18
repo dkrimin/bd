@@ -1,0 +1,55 @@
+dim@kek:~$ su
+Пароль: 
+root@kek:/home/dim# su - postgres
+postgres@kek:~$ psql
+psql (13.14 (Debian 13.14-0+deb11u1))
+Введите "help", чтобы получить справку.
+
+postgres=# create user qwe with login password '1111';
+ОШИБКА:  роль "qwe" уже существует
+postgres=# \l
+postgres=# drop database qaz;
+DROP DATABASE
+postgres=# drop user qwe;
+DROP ROLE
+postgres=# create user qwe with login password '1111';
+CREATE ROLE
+postgres=# create database qaz owner qwe;
+CREATE DATABASE
+
+qaz=# create table user (user_id serial primary key, email varchar(255), name varchar(100), lastname varchar(255));
+ОШИБКА:  ошибка синтаксиса (примерное положение: "user")
+СТРОКА 1: create table user (user_id serial primary key, email varchar...
+                       ^
+qaz=# create table users (user_id serial primary key, email varchar(255), name varchar(100), lastname varchar(255));
+CREATE TABLE
+qaz=# insert into users (email, name, lastname) values ('danay', 'lapshin', 'dl@mail.cm'), ('slava@mail.com', 'slava', 'gggggalinovv);'
+qaz(# select * from users;
+qaz(# 
+
+
+
+
+
+dim@kek:~$ su
+Пароль: 
+root@kek:/home/dim# su - postgres
+postgres@kek:~$ psql qaz
+psql (13.14 (Debian 13.14-0+deb11u1))
+Введите "help", чтобы получить справку.
+
+qaz=# insert into users (email, name, lastname) values ('danay', 'lapshin', 'dl@mail.cm'), ('slava@mail.com', 'slava', 'gggggalinovv');
+INSERT 0 2
+qaz=# select * from users;
+ user_id |     email      |  name   |   lastname   
+---------+----------------+---------+--------------
+       1 | danay          | lapshin | dl@mail.cm
+       2 | slava@mail.com | slava   | gggggalinovv
+(2 строки)
+
+qaz=# update users set lastname = 'galinov' where name = 'slava';
+UPDATE 1
+qaz=# delete from users where name = 'lapshin';
+DELETE 1
+qaz=# 
+
